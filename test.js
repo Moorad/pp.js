@@ -36,7 +36,14 @@ function testList(file = './testList.csv') {
 	});
 }
 
-testList();
+// testList();
+
+request('https://osu.ppy.sh/osu/1241370', {encoding: null}, (err, res, body) => {
+	var beatmap = ppjs.processContent(body);
+	ppjs.calculatePerformancePoints(beatmap, {}, (data) => {
+		console.log(data);
+	})
+})
 
 function testMap(data) {
 	request(`https://osu.ppy.sh/osu/${data[0]}`, {

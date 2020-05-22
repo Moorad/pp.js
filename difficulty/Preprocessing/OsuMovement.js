@@ -6,94 +6,138 @@ const correction0MovingSpline = new Utility.LinearSpline().interpolateSorted([-1
 
 const numCoeffs = 4;
 
-var ds0f = [0, 1, 1.35 , 1.7, 2.3, 3];
+var ds0f = [0, 1, 1.35, 1.7, 2.3, 3];
 var ks0f = [-11.5, -5.9, -5.4, -5.6, -2, -2];
 var scales0f = [1, 1, 1, 1, 1, 1];
-var coeffs0f = [[[ 0   , -0.5 , -1.15 , -1.8 , -2   , -2   ],
-[ 0   ,  0   ,  0    ,  0   ,  0   ,  0   ],
-[ 1   ,  1   ,  1    ,  1   ,  1   ,  1   ],
-[ 6   ,  1   ,  1    ,  1   ,  1   ,  1   ]],
-[[ 0   , -0.8 , -0.9  , -1   , -1   , -1   ],
-[ 0   ,  0.5 ,  0.75 ,  1   ,  2   ,  2   ],
-[ 1   ,  0.5 ,  0.4  ,  0.3 ,  0   ,  0   ],
-[ 3   ,  0.7 ,  0.7  ,  0.7 ,  1   ,  1   ]],
-[[ 0   , -0.8 , -0.9  , -1   , -1   , -1   ],
-[ 0   , -0.5 , -0.75 , -1   , -2   , -2   ],
-[ 1   ,  0.5 ,  0.4  ,  0.3 ,  0   ,  0   ],
-[ 3   ,  0.7 ,  0.7  ,  0.7 ,  1   ,  1   ]],
-[[ 0   ,  0   ,  0    ,  0   ,  0   ,  0   ],
-[ 0   ,  0.95,  0.975,  1   ,  0   ,  0   ],
-[ 0   ,  0   ,  0    ,  0   ,  0   ,  0   ],
-[ 0   ,  0.7 ,  0.55 ,  0.4 ,  0   ,  0   ]],
-[[ 0   ,  0   ,  0    ,  0   ,  0   ,  0   ],
-[ 0   , -0.95, -0.975, -1   ,  0   ,  0   ],
-[ 0   ,  0   ,  0    ,  0   ,  0   ,  0   ],
-[ 0   ,  0.7 ,  0.55 ,  0.4 ,  0   ,  0   ]]];
+var coeffs0f = [
+	[
+		[0, -0.5, -1.15, -1.8, -2, -2],
+		[0, 0, 0, 0, 0, 0],
+		[1, 1, 1, 1, 1, 1],
+		[6, 1, 1, 1, 1, 1]
+	],
+	[
+		[0, -0.8, -0.9, -1, -1, -1],
+		[0, 0.5, 0.75, 1, 2, 2],
+		[1, 0.5, 0.4, 0.3, 0, 0],
+		[3, 0.7, 0.7, 0.7, 1, 1]
+	],
+	[
+		[0, -0.8, -0.9, -1, -1, -1],
+		[0, -0.5, -0.75, -1, -2, -2],
+		[1, 0.5, 0.4, 0.3, 0, 0],
+		[3, 0.7, 0.7, 0.7, 1, 1]
+	],
+	[
+		[0, 0, 0, 0, 0, 0],
+		[0, 0.95, 0.975, 1, 0, 0],
+		[0, 0, 0, 0, 0, 0],
+		[0, 0.7, 0.55, 0.4, 0, 0]
+	],
+	[
+		[0, 0, 0, 0, 0, 0],
+		[0, -0.95, -0.975, -1, 0, 0],
+		[0, 0, 0, 0, 0, 0],
+		[0, 0.7, 0.55, 0.4, 0, 0]
+	]
+];
 
 
 var ds0s = [0, 1.5, 2.5, 4, 6, 8];
 var ks0s = [-1, -5, -6.7, -6.5, -4.3, -4.3];
 var scales0s = [1, 0.85, 0.6, 0.8, 1, 1];
-var coeffs0s = [[[ 0.5 ,  2   ,  2.8 ,  5   ,  5   ,  5   ],
-[ 0   ,  0   ,  0   ,  0   ,  0   ,  0   ],
-[ 1   ,  1   ,  1   ,  0   ,  0   ,  0   ],
-[ 0.6 ,  1   ,  0.8 ,  0.6 ,  0.2 ,  0.2 ]],
-[[ 0.25,  1   ,  0.7 ,  2   ,  2   ,  2   ],
-[ 0.5 ,  2   ,  2.8 ,  4   ,  6   ,  6   ],
-[ 1   ,  1   ,  1   ,  1   ,  1   ,  1   ],
-[ 0.6 ,  1   ,  0.8 ,  0.3 ,  0.2 ,  0.2 ]],
-[[ 0.25,  1   ,  0.7 ,  2   ,  2   ,  2   ],
-[-0.5 , -2   , -2.8 , -4   , -6   , -6   ],
-[ 1   ,  1   ,  1   ,  1   ,  1   ,  1   ],
-[ 0.6 ,  1   ,  0.8 ,  0.3 ,  0.2 ,  0.2 ]],
-[[ 0   ,  0   , -0.5 , -2   , -3   , -3   ],
-[ 0   ,  0   ,  0   ,  0   ,  0   ,  0   ],
-[ 1   ,  1   ,  1   ,  1   ,  1   ,  1   ],
-[-0.7 , -1   , -0.9 , -0.1 , -0.1 , -0.1 ]]];
+var coeffs0s = [
+	[
+		[0.5, 2, 2.8, 5, 5, 5],
+		[0, 0, 0, 0, 0, 0],
+		[1, 1, 1, 0, 0, 0],
+		[0.6, 1, 0.8, 0.6, 0.2, 0.2]
+	],
+	[
+		[0.25, 1, 0.7, 2, 2, 2],
+		[0.5, 2, 2.8, 4, 6, 6],
+		[1, 1, 1, 1, 1, 1],
+		[0.6, 1, 0.8, 0.3, 0.2, 0.2]
+	],
+	[
+		[0.25, 1, 0.7, 2, 2, 2],
+		[-0.5, -2, -2.8, -4, -6, -6],
+		[1, 1, 1, 1, 1, 1],
+		[0.6, 1, 0.8, 0.3, 0.2, 0.2]
+	],
+	[
+		[0, 0, -0.5, -2, -3, -3],
+		[0, 0, 0, 0, 0, 0],
+		[1, 1, 1, 1, 1, 1],
+		[-0.7, -1, -0.9, -0.1, -0.1, -0.1]
+	]
+];
 
 var ds3f = [0, 1, 2, 3, 4];
 var ks3f = [-4, -5.3, -5.2, -2.5, -2.5];
 var scales3f = [1, 1, 1, 1, 1];
-var coeffs3f = [[[0   ,  1.2 ,  2   ,  2   ,  2  ],
-[0   ,  0   ,  0   ,  0   ,  0  ],
-[0   ,  0   ,  0   ,  0   ,  0  ],
-[1.5 ,  1   ,  0.4 ,  0   ,  0  ]],
-[[0   ,  0   ,  0   ,  0   ,  0  ],
-[0   ,  0   ,  0   ,  0   ,  0  ],
-[0   ,  0   ,  0   ,  0   ,  0  ],
-[2   ,  1.5 ,  2.5 ,  3.5 ,  3.5]],
-[[0   ,  0.3 ,  0.6 ,  0.6 ,  0.6],
-[0   ,  1   ,  2.4 ,  2.4 ,  2.4],
-[0   ,  0   ,  0   ,  0   ,  0  ],
-[0   ,  0.4 ,  0.4 ,  0   ,  0  ]],
-[[0   ,  0.3 ,  0.6 ,  0.6 ,  0.6],
-[0   , -1   , -2.4 , -2.4 , -2.4],
-[0   ,  0   ,  0   ,  0   ,  0  ],
-[0   ,  0.4 ,  0.4 ,  0   ,  0  ]]];
+var coeffs3f = [
+	[
+		[0, 1.2, 2, 2, 2],
+		[0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0],
+		[1.5, 1, 0.4, 0, 0]
+	],
+	[
+		[0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0],
+		[2, 1.5, 2.5, 3.5, 3.5]
+	],
+	[
+		[0, 0.3, 0.6, 0.6, 0.6],
+		[0, 1, 2.4, 2.4, 2.4],
+		[0, 0, 0, 0, 0],
+		[0, 0.4, 0.4, 0, 0]
+	],
+	[
+		[0, 0.3, 0.6, 0.6, 0.6],
+		[0, -1, -2.4, -2.4, -2.4],
+		[0, 0, 0, 0, 0],
+		[0, 0.4, 0.4, 0, 0]
+	]
+];
 
 var ds3s = [1, 1.5, 2.5, 4, 6, 8];
 var ks3s = [-2, -2, -3, -5.4, -4.9, -4.9];
 var scales3s = [1, 1, 1, 1, 1, 1];
-var coeffs3s = [[[-2  , -2  , -3  , -4  , -6  , -6  ],
-[ 0  ,  0  ,  0  ,  0  ,  0  ,  0  ],
-[ 1  ,  1  ,  1  ,  0  ,  0  ,  0  ],
-[ 0.4,  0.4,  0.2,  0.4,  0.3,  0.3]],
-[[-1  , -1  , -1.5, -2  , -3  , -3  ],
-[ 1.4,  1.4,  2.1,  2  ,  3  ,  3  ],
-[ 1  ,  1  ,  1  ,  1  ,  1  ,  1  ],
-[ 0.4,  0.4,  0.2,  0.4,  0.2,  0.2]],
-[[-1  , -1  , -1.5, -2  , -3  , -3  ],
-[-1.4, -1.4, -2.1, -2  , -3  , -3  ],
-[ 1  ,  1  ,  1  ,  1  ,  1  ,  1  ],
-[ 0.4,  0.4,  0.2,  0.4,  0.2,  0.2]],
-[[ 0  ,  0  ,  0  ,  0  ,  0  ,  0  ],
-[ 0  ,  0  ,  0  ,  0  ,  0  ,  0  ],
-[ 0  ,  0  ,  0  ,  0  ,  0  ,  0  ],
-[ 0  ,  0  ,  1  ,  0.6,  0.6,  0.6]],
-[[ 1  ,  1  ,  1.5,  2  ,  3  ,  3  ],
-[ 0  ,  0  ,  0  ,  0  ,  0  ,  0  ],
-[ 1  ,  1  ,  1  ,  1  ,  1  ,  1  ],
-[ 0  ,  0  , -0.6, -0.4, -0.3, -0.3]]];
+var coeffs3s = [
+	[
+		[-2, -2, -3, -4, -6, -6],
+		[0, 0, 0, 0, 0, 0],
+		[1, 1, 1, 0, 0, 0],
+		[0.4, 0.4, 0.2, 0.4, 0.3, 0.3]
+	],
+	[
+		[-1, -1, -1.5, -2, -3, -3],
+		[1.4, 1.4, 2.1, 2, 3, 3],
+		[1, 1, 1, 1, 1, 1],
+		[0.4, 0.4, 0.2, 0.4, 0.2, 0.2]
+	],
+	[
+		[-1, -1, -1.5, -2, -3, -3],
+		[-1.4, -1.4, -2.1, -2, -3, -3],
+		[1, 1, 1, 1, 1, 1],
+		[0.4, 0.4, 0.2, 0.4, 0.2, 0.2]
+	],
+	[
+		[0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0],
+		[0, 0, 1, 0.6, 0.6, 0.6]
+	],
+	[
+		[1, 1, 1.5, 2, 3, 3],
+		[0, 0, 0, 0, 0, 0],
+		[1, 1, 1, 1, 1, 1],
+		[0, 0, -0.6, -0.4, -0.3, -0.3]
+	]
+];
 
 
 const tRatioThreshold = 1.4;
@@ -121,7 +165,7 @@ function extractMovement(obj0, obj1, obj2, obj3, tapStrain, clockRate, hidden = 
 	movement.RawMT = t12;
 	movement.Time = obj2.startTime / 1000;
 
-	if ( obj2.objectName == 'spinner' || obj1.objectName == 'spinner') {
+	if (obj2.objectName == 'spinner' || obj1.objectName == 'spinner') {
 		movement.IP12 = 0;
 		movement.D = 0;
 		movement.MT = 1;
@@ -206,7 +250,7 @@ function extractMovement(obj0, obj1, obj2, obj3, tapStrain, clockRate, hidden = 
 				var normalized_pos0 = s01.pointwiseNegate().pointwiseDivide(t01).pointwiseMultiply(t12);
 				var x0 = normalized_pos0.dotProduct(s12) / d12;
 				var y0 = normalized_pos0.pointwiseSubtract(s12.pointwiseMultiply(x0).pointwiseDivide(d12)).L2Norm();
-				
+
 				var correction0Flow = calcCorrection0Or3(d12, x0, y0, constants.k0fInterp, constants.scale0fInterp, constants.coeffs0fInterps);
 				var correction0Snap = calcCorrection0Or3(d12, x0, y0, constants.k0sInterp, constants.scale0sInterp, constants.coeffs0sInterps);
 				var correction0Stop = calcCorrection0Stop(d12, x0, y0);
@@ -352,7 +396,17 @@ function extractMovement(obj0, obj1, obj2, obj3, tapStrain, clockRate, hidden = 
 	// Correction #13
 	var jumpOverlapCorrection = 1 - (Math.max(0.15 - 0.1 * d02, 0) + Math.max(0.1125 - 0.075 * dMinus22, 0)) * Utility.logistic((d12 - 3.3) / 0.25);
 
-	var d12WithCorrection = d12StackedNerf * (1 + smallCircleBonus) * (1 + correction0 + correction3 + patternCorrection) * (1 + highBpmJumpBuff) * (1 + tapCorrection) * smallJumpNerfFactor * bigJumpBuffFactor * (1 + correctionHidden) * jumpOverlapCorrection;
+	// Correction #14
+	var distanceIncreaseBuff = 1;
+	if (obj0 != null) {
+		var d01OverlapNerf = Math.min(1, Math.pow(d01, 3));
+		var timeDifferenceNerf = Math.exp(-4 * Math.pow(1 - Math.max(t12 / t01, t01 / t12), 2));
+		var distanceRatio = d12 / Math.max(1, d01);
+		var bpmScaling = Math.max(1, -16 * t12 + 3.4);
+		distanceIncreaseBuff = 1 + 0.225 * bpmScaling * timeDifferenceNerf * d01OverlapNerf * Math.max(0, distanceRatio - 2);
+	}
+
+	var d12WithCorrection = d12StackedNerf * (1 + smallCircleBonus) * (1 + correction0 + correction3 + patternCorrection) * (1 + highBpmJumpBuff) * (1 + tapCorrection) * smallJumpNerfFactor * bigJumpBuffFactor * (1 + correctionHidden) * jumpOverlapCorrection * distanceIncreaseBuff;
 
 	movement.D = d12WithCorrection;
 	movement.MT = t12;
@@ -390,7 +444,7 @@ function initialize() {
 	var interp3f = prepareInterp(ds3f, ks3f, scales3f, coeffs3f, '3f');
 	var interp3s = prepareInterp(ds3s, ks3s, scales3s, coeffs3s, '3s');
 	return {
-		k0fInterp : interp0f[0],
+		k0fInterp: interp0f[0],
 		scale0fInterp: interp0f[1],
 		coeffs0fInterps: interp0f[2],
 		k0sInterp: interp0s[0],
@@ -407,9 +461,9 @@ function initialize() {
 
 function prepareInterp(ds, ks, scales, coeffs, type) {
 
-		var kInterp = new Utility.LinearSpline().interpolateSorted(ds, ks);
-		var scaleInterp = new Utility.LinearSpline().interpolateSorted(ds, scales);
-		var coeffsInterps = Array(Utility.arrays.getLength(coeffs,0)).fill().map(() => Array(numCoeffs).fill(0));
+	var kInterp = new Utility.LinearSpline().interpolateSorted(ds, ks);
+	var scaleInterp = new Utility.LinearSpline().interpolateSorted(ds, scales);
+	var coeffsInterps = Array(Utility.arrays.getLength(coeffs, 0)).fill().map(() => Array(numCoeffs).fill(0));
 
 
 	for (var i = 0; i < Utility.arrays.getLength(coeffs, 0); i++) {
@@ -418,7 +472,7 @@ function prepareInterp(ds, ks, scales, coeffs, type) {
 			for (var k = 0; k < Utility.arrays.getLength(coeffs, 2); k++) {
 				coeff_ij[k] = coeffs[i][j][k];
 			}
-				coeffsInterps[i][j] = new Utility.LinearSpline().interpolateSorted(ds, coeff_ij);
+			coeffsInterps[i][j] = new Utility.LinearSpline().interpolateSorted(ds, coeff_ij);
 		}
 	}
 

@@ -65,7 +65,7 @@ class HitProbabilities {
 	}
 
 	expectedFcTime(tp, start, sectionCount) {
-		var fcTime = 5;
+		var fcTime = 15;
 		for (var i = start; i != start + sectionCount; i++)
 		{
 			if (this.sections[i].Movements.length != 0)

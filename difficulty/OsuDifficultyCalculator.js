@@ -6,11 +6,11 @@ const Aim = require('./Skills/Aim');
 const Mean = require('./MathUtil/Mean');
 const HitWindows = require('./Beatmap/HitWindows');
 
-const aimMultiplier = 0.515;
-const tapMultiplier = 0.515;
-const fingerControlMultiplier = 1;
+const aimMultiplier = 0.614;
+const tapMultiplier = 0.614;
+const fingerControlMultiplier = 1.245;
 
-const srExponent = 0.9;
+const srExponent = 0.83;
 
 function calculate(beatmap, mods, clockRate) {
 	// console.log(beatmap.hitObjects)
