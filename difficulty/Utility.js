@@ -269,7 +269,7 @@ function getHitObjectRadius(circleSize) {
 }
 
 function getSliderCombo(beatmap, hitObject) {
-	if (hitObject.objectName == 'circle') return 0;
+	if (hitObject.objectName != 'slider') return 0;
 	var sliderMultiplier = parseFloat(beatmap.SliderMultiplier);
 	var sliderTickRate = parseInt(beatmap.SliderTickRate, 10);
 
