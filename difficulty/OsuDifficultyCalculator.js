@@ -41,9 +41,9 @@ function calculate(beatmap, mods, clockRate) {
 	
 	var hitWindows = new HitWindows.HitWindows();
 	hitWindows.setDifficulty(parseFloat(beatmap.OverallDifficulty));
-
-	var hitWindowGreat = hitWindows.windowFor('great') / clockRate;
-	var preempt = BeatmapDifficulty.difficultyRange(beatmap.ApproachRate, 1800, 1200, 450) / clockRate;
+	
+	var hitWindowGreat = parseInt(hitWindows.windowFor('great')) / clockRate;
+	var preempt = parseInt(BeatmapDifficulty.difficultyRange(beatmap.ApproachRate, 1800, 1200, 450)) / clockRate;
 
 	var maxCombo = beatmap.maxCombo;
 

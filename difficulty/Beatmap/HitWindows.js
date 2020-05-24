@@ -1,12 +1,10 @@
 const BeatmapDifficulty = require('./BeatmapDifficulty');
 
-const base_ranges = [
-	difficultyRange('perfect', 22.4, 19.4, 13.9),
-	difficultyRange('great', 64, 49, 34),
-	difficultyRange('good', 97, 82, 67),
-	difficultyRange('ok', 127, 112, 97),
-	difficultyRange('meh', 151, 136, 121),
-	difficultyRange('miss', 188, 173, 158)
+const osu_ranges = [
+	difficultyRange('great', 80, 50, 20),
+	difficultyRange('good', 140, 100, 60),
+	difficultyRange('meh', 200, 150, 100),
+	difficultyRange('miss', 400 , 400, 400)
 ];
 
 
@@ -33,7 +31,7 @@ class HitWindows {
 	}
 
 	setDifficulty(difficulty) {
-		for (var range of base_ranges) {
+		for (var range of osu_ranges) {
 			var value = BeatmapDifficulty.difficultyRange(difficulty, range.min, range.average, range.max)
 	
 			switch (range.result) {

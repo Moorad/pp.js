@@ -56,7 +56,7 @@ function calculate(beatmapData, score) {
 	}
 	
 
-	greatWindow = 79.5 - 6 * beatmapData.OverallDifficulty;
+	greatWindow = 79.5 - 6 * Attributes.OverallDifficulty;
 
 	var multiplier = 2.14;
 
