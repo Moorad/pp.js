@@ -93,7 +93,7 @@ function calculate(beatmapData, score) {
 	// console.log(greatWindow);
 	var totalValue = Mean.multiplePowerMean([aimValue, tapValue, accuracyValue], totalValueExponent) * multiplier;
 
-	return {pp: totalValue, aimpp: aimValue, tappp: tapValue, accpp: accuracyValue};	
+	return {pp: totalValue, aimpp: aimValue, tappp: tapValue, accpp: accuracyValue, attributes: Attributes};	
 }
 
 function computeAimValue() {
