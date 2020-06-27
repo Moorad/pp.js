@@ -1,5 +1,5 @@
 {
-  "name": "pp.js",
+  "name": "tbbpp",
   "version": "1.0.0",
   "description": "This is a pp calculator that is fully implemented with Javascript for the new delta_t algorithm.\r This was primarily made for [The Beautiful Bot](https://github.com/moorad/the-beautiful-bot) but I thought it would be a good idea to make it its own package and make it available for everyone.",
   "main": "index.js",
