@@ -1,3 +1,12 @@
+// Notifier
+const updateNotifier = require('update-notifier');
+const pkg = require('./package.json');
+
+updateNotifier({
+    pkg,
+    updateCheckInterval: 1000 * 60 * 60 * 24
+}).notify();
+
 const OsuPerformanceCalculator = require('./difficulty/OsuPerformanceCalculator');
 const OsuDifficultyCalculator = require('./Difficulty/OsuDifficultyCalculator');
 
