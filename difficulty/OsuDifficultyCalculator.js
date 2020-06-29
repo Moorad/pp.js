@@ -48,32 +48,32 @@ function calculate(beatmap, mods, clockRate) {
 	var maxCombo = beatmap.maxCombo;
 
 	return {
-		StarRating: sr,
-		Mods: mods,
+		SR: sr,
+		mods: mods,
 		Length: mapLength,
 
-		TapSR: tapSR,
-		TapDiff: tapDiff,
-		StreamNoteCount: streamNoteCount,
-		MashLevels: mashLevels,
-		TapSkills: tapSkills,
+		tapSR: tapSR,
+		tapDiff: tapDiff,
+		streamNoteCount: streamNoteCount,
+		mashLevels: mashLevels,
+		tapSkills: tapSkills,
 
-		FingerControlSR: fingerControlSR,
-		FingerControlDiff: fingerControlDiff,
+		fingerControlSR: fingerControlSR,
+		fingerControlDiff: fingerControlDiff,
 
-		AimSR: aimSR,
-		AimDiff: aimDiff,
-		AimHiddenFactor: aimHiddenFactor,
-		ComboTPs: comboTPs,
-		MissTPs: missTPs,
-		MissCounts: missCounts,
-		CheeseNoteCount: cheeseNoteCount,
-		CheeseLevels: cheeseLevels,
-		CheeseFactors: cheeseFactors,
+		aimSR: aimSR,
+		aimDiff: aimDiff,
+		aimHiddenFactor: aimHiddenFactor,
+		comboTPs: comboTPs,
+		missTPs: missTPs,
+		missCounts: missCounts,
+		cheeseNoteCount: cheeseNoteCount,
+		cheeseLevels: cheeseLevels,
+		cheeseFactors: cheeseFactors,
 
-		ApproachRate: preempt > 1200 ? (1800 - preempt) / 120 : (1200 - preempt) / 150 + 5,
-		OverallDifficulty: (80 - hitWindowGreat) / 6,
-		MaxCombo: maxCombo
+		approachRate: preempt > 1200 ? (1800 - preempt) / 120 : (1200 - preempt) / 150 + 5,
+		overallDifficulty: (80 - hitWindowGreat) / 6,
+		maxCombo: maxCombo
 	};
 
 }

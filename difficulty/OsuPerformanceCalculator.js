@@ -41,11 +41,11 @@ function calculate(beatmapData, score) {
 	mods = score.mods || '';
 
 	accuracy = score.accuracy || 1;
-	scoreMaxCombo = score.maxCombo || beatmap.maxCombo;
+	scoreMaxCombo = score.combo || beatmap.maxCombo;
 	countGreat = score.count300 || 0;
 	countGood = score.count100 || 0;
 	countMeh = score.count50 || 0;
-	countMiss = score.countMiss || 0;
+	countMiss = score.misses || 0;
 
 	if (accuracy) {
 		var hitResults = Utility.getHitResults(accuracy, beatmap, countMiss);
@@ -56,7 +56,7 @@ function calculate(beatmapData, score) {
 	}
 	
 
-	greatWindow = 79.5 - 6 * Attributes.OverallDifficulty;
+	greatWindow = 79.5 - 6 * Attributes.overallDifficulty;
 
 	var multiplier = 2.14;
 
@@ -103,14 +103,14 @@ function computeAimValue() {
 
 	var x = totalHits();
 
-	var comboTPCount = Attributes.ComboTPs.length;
+	var comboTPCount = Attributes.comboTPs.length;
 	var comboPercentages = Utility.linearSpaced(comboTPCount, 1.0 / comboTPCount, 1);
 
 	var scoreComboPercentage = (scoreMaxCombo) / beatmapMaxCombo;
-	var comboTP = new Utility.LinearSpline().interpolateSorted(comboPercentages, Attributes.ComboTPs).interpolate(scoreComboPercentage);
+	var comboTP = new Utility.LinearSpline().interpolateSorted(comboPercentages, Attributes.comboTPs).interpolate(scoreComboPercentage);
 
 
-	var missTP = new Utility.LinearSpline().interpolateSorted(Attributes.MissCounts, Attributes.MissTPs).interpolate(effectiveMissCount);
+	var missTP = new Utility.LinearSpline().interpolateSorted(Attributes.missCounts, Attributes.missTPs).interpolate(effectiveMissCount);
 	missTP = Math.max(missTP, 0);
 
 	// Combine combo based throughput and miss count based throughput
@@ -119,12 +119,12 @@ function computeAimValue() {
 	// Hidden mod
 	if (mods.includes('HD'))
 	{
-		var hiddenFactor = Attributes.AimHiddenFactor;
+		var hiddenFactor = Attributes.aimHiddenFactor;
 
-		if (Attributes.ApproachRate > 10.75)
+		if (Attributes.approachRate > 10.75)
 			hiddenFactor = 1;
-		else if (Attributes.ApproachRate > 9.75)
-			hiddenFactor = 1 + (1 - Math.pow(Math.sin((Attributes.ApproachRate - 9.75) * Math.PI / 2), 2)) * (hiddenFactor - 1);
+		else if (Attributes.approachRate > 9.75)
+			hiddenFactor = 1 + (1 - Math.pow(Math.sin((Attributes.approachRate - 9.75) * Math.PI / 2), 2)) * (hiddenFactor - 1);
 
 		tp *= hiddenFactor;
 	}
@@ -132,14 +132,14 @@ function computeAimValue() {
 
 	// Account for cheesing
 	var modifiedAcc = getModifiedAcc();
-	var accOnCheeseNotes = 1 - (1 - modifiedAcc) * Math.sqrt(totalHits() / Attributes.CheeseNoteCount);
+	var accOnCheeseNotes = 1 - (1 - modifiedAcc) * Math.sqrt(totalHits() / Attributes.cheeseNoteCount);
 
 	// accOnCheeseNotes can be negative. The formula below ensures a positive acc while
 	// preserving the value when accOnCheeseNotes is close to 1
 	var accOnCheeseNotesPositive = Math.exp(accOnCheeseNotes - 1);
 	var urOnCheeseNotes = 10 * greatWindow / (Math.sqrt(2) * Utility.erfInv(accOnCheeseNotesPositive));
-	var cheeseLevel = Utility.logistic(((urOnCheeseNotes * Attributes.AimDiff) - 3200) / 2000);
-	var cheeseFactor = new Utility.LinearSpline().interpolateSorted(Attributes.CheeseLevels, Attributes.CheeseFactors).interpolate(cheeseLevel);
+	var cheeseLevel = Utility.logistic(((urOnCheeseNotes * Attributes.aimDiff) - 3200) / 2000);
+	var cheeseFactor = new Utility.LinearSpline().interpolateSorted(Attributes.cheeseLevels, Attributes.cheeseFactors).interpolate(cheeseLevel);
 
 	if (mods.includes('TD'))
 		tp = Math.min(tp, 1.47 * Math.Pow(tp, 0.8));
@@ -154,10 +154,10 @@ function computeAimValue() {
 
 	// Buff very high AR and low AR
 	var approachRateFactor = 1.0;
-	if (Attributes.ApproachRate > 10) {
+	if (Attributes.approachRate > 10) {
 		approachRateFactor += (0.05 + 0.35 * Math.pow(Math.sin(Math.PI * Math.min(totalHits(), 1250) / 2500), 1.7)) * Math.pow(Attributes.ApproachRate - 10, 2);
-	} else if (Attributes.ApproachRate < 8.0) {
-		approachRateFactor += 0.01 * (8.0 - Attributes.ApproachRate);
+	} else if (Attributes.approachRate < 8.0) {
+		approachRateFactor += 0.01 * (8.0 - Attributes.approachRate);
 	}
 
 	aimValue *= approachRateFactor;
@@ -170,7 +170,7 @@ function computeAimValue() {
 	}
 
 	// Scale the aim value down with accuracy
-	var accLeniency = greatWindow * Attributes.AimDiff / 300;
+	var accLeniency = greatWindow * Attributes.aimDiff / 300;
 	var accPenalty = (0.09 / (accuracy - 1.3) + 0.3) * (accLeniency + 1.5);
 	aimValue *= Math.exp(-accPenalty);
 
@@ -185,7 +185,7 @@ function computeTapValue() {
 		var modifiedAcc = getModifiedAcc();
 
 		// Assume SS for non-stream parts
-		var accOnStreams = 1 - (1 - modifiedAcc) * Math.sqrt(totalHits() / Attributes.StreamNoteCount);
+		var accOnStreams = 1 - (1 - modifiedAcc) * Math.sqrt(totalHits() / Attributes.streamNoteCount);
 
 		// accOnStreams can be negative. The formula below ensures a positive acc while
 		// preserving the value when accOnStreams is close to 1
@@ -193,9 +193,9 @@ function computeTapValue() {
 
 		var urOnStreams = 10 * greatWindow / (Math.sqrt(2) * Utility.erfInv(accOnStreamsPositive));
 
-		var mashLevel = Utility.logistic(((urOnStreams * Attributes.TapDiff) - 4000) / 1000);
+		var mashLevel = Utility.logistic(((urOnStreams * Attributes.tapDiff) - 4000) / 1000);
 
-		var tapSkill = new Utility.LinearSpline().interpolateSorted(Attributes.MashLevels, Attributes.TapSkills).interpolate(mashLevel);
+		var tapSkill = new Utility.LinearSpline().interpolateSorted(Attributes.mashLevels, Attributes.tapSkills).interpolate(mashLevel);
 
 		var tapValue = tapSkillToPP(tapSkill);
 
@@ -214,8 +214,8 @@ function computeTapValue() {
 		// Buff very high AR
 		var approachRateFactor = 1.0;
 		var ar11lengthBuff = 0.8 * (Utility.logistic(totalHits() / 500) - 0.5);
-		if (Attributes.ApproachRate > 10.33) {
-			approachRateFactor += ar11lengthBuff * (Attributes.ApproachRate - 10.33) / 0.67;
+		if (Attributes.approachRate > 10.33) {
+			approachRateFactor += ar11lengthBuff * (Attributes.approachRate - 10.33) / 0.67;
 		}
 
 		tapValue *= approachRateFactor;
@@ -225,7 +225,7 @@ function computeTapValue() {
 
 function computeAccuracyValue()
         {
-            var fingerControlDiff = Attributes.FingerControlDiff;
+            var fingerControlDiff = Attributes.fingerControlDiff;
 
             var modifiedAcc = getModifiedAcc();
 
