@@ -12,7 +12,7 @@ function calculatePerformancePoints(beatmap, score) {
 function calculateDifficulty(beatmap, mods) {
 	const clockRate = 1;
 	return new Promise((resolve, reject) => {
-		OsuDifficultyCalculator.calculate(beatmap, mods, clockRate);
+		var difficultyData = OsuDifficultyCalculator.calculate(beatmap, mods, clockRate);
 		resolve(difficultyData);
 	}); 	
 }
