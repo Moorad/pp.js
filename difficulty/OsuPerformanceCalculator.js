@@ -27,11 +27,11 @@ var greatWindow;
 
 var effectiveMissCount;
 
-function calculate(beatmapData, score) {
+function calculate(beatmapData, score, clockRate) {
 
 	beatmap = beatmapData;
 
-	Attributes = OsuDifficultyCalculator.calculate(beatmap, score.mods, 1);
+	Attributes = OsuDifficultyCalculator.calculate(beatmap, score.mods, clockRate);
 
 	countHitCircles = beatmapData.hitObjects.filter(x => x.objectName == 'circle').length;
 	countSliders = beatmapData.hitObjects.filter(x => x.objectName == 'slider').length;
@@ -155,7 +155,7 @@ function computeAimValue() {
 	// Buff very high AR and low AR
 	var approachRateFactor = 1.0;
 	if (Attributes.approachRate > 10) {
-		approachRateFactor += (0.05 + 0.35 * Math.pow(Math.sin(Math.PI * Math.min(totalHits(), 1250) / 2500), 1.7)) * Math.pow(Attributes.ApproachRate - 10, 2);
+		approachRateFactor += (0.05 + 0.35 * Math.pow(Math.sin(Math.PI * Math.min(totalHits(), 1250) / 2500), 1.7)) * Math.pow(Attributes.approachRate - 10, 2);
 	} else if (Attributes.approachRate < 8.0) {
 		approachRateFactor += 0.01 * (8.0 - Attributes.approachRate);
 	}
