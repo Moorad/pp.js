@@ -6,14 +6,29 @@ const Aim = require('./Skills/Aim');
 const Mean = require('./MathUtil/Mean');
 const HitWindows = require('./Beatmap/HitWindows');
 
-const aimMultiplier = 0.614;
-const tapMultiplier = 0.614;
+const aimMultiplier = 0.641;
+const tapMultiplier = 0.641;
 const fingerControlMultiplier = 1.245;
 
 const srExponent = 0.83;
 
 function calculate(beatmap, mods, clockRate) {
-	// console.log(beatmap.hitObjects)
+	if (mods.includes('HR')) {
+		const ratio = 1.4;
+		beatmap.CircleSize = Math.min(parseInt(beatmap.CircleSize) * 1.3, 10);
+		beatmap.ApproachRate = Math.min(parseInt(beatmap.ApproachRate) * ratio, 10);
+		beatmap.HPDrainRate = Math.min(parseInt(beatmap.HPDrainRate) * ratio, 10);
+		beatmap.OverallDifficulty = Math.min(parseInt(beatmap.OverallDifficulty) * ratio, 10);
+	}
+
+	if (mods.includes('EZ')) {
+		const ratio = 0.5;
+		beatmap.CircleSize = parseInt(beatmap.CircleSize) * ratio;
+		beatmap.ApproachRate = parseInt(beatmap.ApproachRate) * ratio;
+		beatmap.HPDrainRate = parseInt(beatmap.HPDrainRate) * ratio;
+		beatmap.OverallDifficulty = parseInt(beatmap.OverallDifficulty) * ratio;
+	}
+
 	var hitObjects = beatmap.hitObjects;
 
 	var mapLength = 0;

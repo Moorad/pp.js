@@ -36,8 +36,8 @@ function calculateDifficulty(beatmap, mods) {
 	var clockRate = 1;
 
 	if (mods.includes('DT')) clockRate = 1.5;
-	if (score.mods.includes('HT')) clockRate = 0.75;
-
+	if (mods.includes('HT')) clockRate = 0.75;
+	
 	return new Promise((resolve, reject) => {
 		var difficultyData = OsuDifficultyCalculator.calculate(beatmap, mods, clockRate);
 		resolve(difficultyData);
