@@ -1,6 +1,6 @@
 const fs = require('fs');
 const parser = require('osu-parser');
-const Utility = require('./Difficulty/Utility');
+const Utility = require('./difficulty/Utility');
 
 function addExtraData(beatmap) {
 	for (var i = 0; i < beatmap.hitObjects.length; i++) {

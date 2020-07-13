@@ -8,7 +8,7 @@ updateNotifier({
 }).notify();
 
 const OsuPerformanceCalculator = require('./difficulty/OsuPerformanceCalculator');
-const OsuDifficultyCalculator = require('./Difficulty/OsuDifficultyCalculator');
+const OsuDifficultyCalculator = require('./difficulty/OsuDifficultyCalculator');
 
 function calculatePerformancePoints(beatmap, score = {}) {
 	score.accuracy = score.accuracy || 1;
